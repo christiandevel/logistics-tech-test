@@ -11,6 +11,7 @@
   "author": "Chritian Moreno <christianmorenoti@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^22.13.11",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.2"
   }
