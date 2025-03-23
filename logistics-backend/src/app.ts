@@ -5,6 +5,11 @@ import colors from "colors";
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Middleware to handle errors
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+	console.error(colors.red.bold(`Error: ${err.message}`));
+	res.status(500).json({ error: "Something broke!", message: err.message });
+})
 
 // Initialize and start the server
 const startServer = async () => {
