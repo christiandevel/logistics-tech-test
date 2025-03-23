@@ -4,6 +4,7 @@ import colors from "colors";
 
 // Import routes
 import { swaggerSpec } from "./config/swagger";
+import { pgPool } from "./config/database";
 
 // Create an Express app
 const app = express();
@@ -26,6 +27,13 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 const startServer = async () => {
 	try {
 		app.listen(port, () => {
+			pgPool.connect((err, client, release) => {
+				if (err) {
+					console.error(colors.red.bold(`Error connecting to database: ${err}`));
+					process.exit(1);
+				}
+				console.log(colors.green.bold(`Database connected`));
+			});
 			console.log(colors.green.bold(`Server running on port ${port}`));
 			console.log(colors.blue.bold(`Swagger UI available at http://localhost:${port}/api-docs`));
 		});
